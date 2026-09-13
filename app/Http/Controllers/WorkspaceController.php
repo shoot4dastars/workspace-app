@@ -8,8 +8,6 @@ use App\Models\Workspace;
 use App\Services\CurrentWorkspace;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class WorkspaceController extends Controller
 {
@@ -47,7 +45,7 @@ class WorkspaceController extends Controller
 
         return redirect()->route('workspace.index')->with('toast', [
             'type' => 'success',
-            'message' => 'Your workspace was created successfully!'
+            'message' => 'Your workspace was created successfully!',
         ]);
     }
 
@@ -86,14 +84,14 @@ class WorkspaceController extends Controller
 
         return redirect()->route('workspace.index')->with('toast', [
             'type' => 'success',
-            'message' => 'Your workspace was updated successfully!'
+            'message' => 'Your workspace was updated successfully!',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Workspace $workspace, CurrentWorkspace  $currentWorkspace)
+    public function destroy(Workspace $workspace, CurrentWorkspace $currentWorkspace)
     {
         $this->authorize('delete', $workspace);
 
@@ -106,7 +104,7 @@ class WorkspaceController extends Controller
 
         return redirect()->route('workspace.index')->with('toast', [
             'type' => 'success',
-            'message' => 'Your workspace was deleted successfully!'
+            'message' => 'Your workspace was deleted successfully!',
         ]);
     }
 

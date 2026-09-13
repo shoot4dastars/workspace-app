@@ -24,7 +24,7 @@ class SetCurrentWorkspace
         if ($user) {
             $workspace = $this->currentWorkspace->get($user);
 
-            if (!$workspace) {
+            if (! $workspace) {
                 $workspace = $user->workspaces()->first();
 
                 if ($workspace) {

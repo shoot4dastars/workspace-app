@@ -11,19 +11,27 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-6 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('workspace.index')" :active="request()->routeIs('workspace.index')">
+                        {{ __('My Workspaces') }}
+                    </x-nav-link>
+
+                    @if($currentWorkspace)
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('workspace.projects.index', $currentWorkspace)" :active="request()->routeIs('workspace.projects.index')">
+                                {{ __('Projects') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-nav-link :href="route('workspace.index')" :active="request()->routeIs('workspace.index')">
-                    {{ __('My Workspaces') }}
-                </x-nav-link>
-
                 @if(auth()->user()->workspaces->isNotEmpty())
                     <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

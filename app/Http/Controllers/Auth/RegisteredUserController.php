@@ -54,8 +54,8 @@ class RegisteredUserController extends Controller
             return redirect()->route('invites.accept', $token);
         } else {
             $workspace = Workspace::create([
-                'name' => $user->name . "'s workspace",
-                'slug' => Str::slug($user->name) . '-workspace-' . Str::random(5),
+                'name' => $user->name."'s workspace",
+                'slug' => Str::slug($user->name).'-workspace-'.Str::random(5),
             ]);
 
             $workspace->users()->attach($user->id, ['role' => Role::owner->value]);

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class WorkspaceRequest extends FormRequest
+class ProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class WorkspaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:255', Rule::unique('workspaces', 'name')->ignore($this->workspace)],
+            'name' => ['required', 'string', 'min:3', 'max:255',
+                Rule::unique('projects', 'name')
+                    ->where('workspace_id', $this->route('workspace')->id)
+                    ->ignore($this->project), ],
             'description' => 'nullable|string|min:5|max:2000',
         ];
     }

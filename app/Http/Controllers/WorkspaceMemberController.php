@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 class WorkspaceMemberController extends Controller
 {
     use AuthorizesRequests;
+
     public function leave(Workspace $workspace, CurrentWorkspace $currentWorkspace)
     {
         $member = $workspace->users()->where('user_id', auth()->id())->first();
@@ -21,7 +22,7 @@ class WorkspaceMemberController extends Controller
         if ($member->pivot->role === Role::owner) {
             return back()->with('toast', [
                 'type' => 'error',
-                'message' => "Transfer ownership before leaving.",
+                'message' => 'Transfer ownership before leaving.',
             ]);
         }
 
@@ -42,7 +43,7 @@ class WorkspaceMemberController extends Controller
         $this->authorize('transferOwnership', $workspace);
 
         $validated = $request->validate([
-           'new_owner_id' => 'required|integer|exists:users,id',
+            'new_owner_id' => 'required|integer|exists:users,id',
         ]);
 
         $newOwner = User::findOrFail($validated['new_owner_id']);
@@ -53,7 +54,7 @@ class WorkspaceMemberController extends Controller
 
         return back()->with('toast', [
             'type' => 'success',
-            'message' => "Ownership transferred to {$newOwner->name}."
+            'message' => "Ownership transferred to {$newOwner->name}.",
         ]);
     }
 

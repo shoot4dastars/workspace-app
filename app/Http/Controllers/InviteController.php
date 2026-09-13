@@ -30,7 +30,7 @@ class InviteController extends Controller
         if ($workspace->users()->where('email', $validated['email'])->exists()) {
             return back()->with('toast', [
                 'type' => 'error',
-                'message' => 'User already a member of this workspace.'
+                'message' => 'User already a member of this workspace.',
             ]);
         }
 
@@ -41,7 +41,7 @@ class InviteController extends Controller
         if ($existingInvite && $existingInvite->isPending()) {
             return back()->with('toast', [
                 'type' => 'error',
-                'message' => 'A pending invitation exists already.'
+                'message' => 'A pending invitation exists already.',
             ]);
         }
 
@@ -62,7 +62,7 @@ class InviteController extends Controller
 
         return back()->with('toast', [
             'type' => 'success',
-            'message' => 'Invitation sent successfully.'
+            'message' => 'Invitation sent successfully.',
         ]);
     }
 
@@ -70,7 +70,7 @@ class InviteController extends Controller
     {
         $invite = Invite::where('token', $token)->first();
 
-        if (!$invite) {
+        if (! $invite) {
             return redirect()
                 ->route(auth()->check() ? 'dashboard' : 'login')
                 ->with('toast', [
@@ -79,7 +79,7 @@ class InviteController extends Controller
                 ]);
         }
 
-        if (!$invite->isPending()) {
+        if (! $invite->isPending()) {
             return redirect()
                 ->route(auth()->check() ? 'dashboard' : 'login')
                 ->with('toast', [
@@ -88,7 +88,7 @@ class InviteController extends Controller
                 ]);
         }
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             session(['pending_invite_token' => $token]);
 
             $userExists = User::where('email', $invite->email)->exists();

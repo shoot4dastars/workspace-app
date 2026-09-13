@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Enums\Role;
 use App\Models\User;
 use App\Models\Workspace;
-use Illuminate\Auth\Access\Response;
 
 class WorkspacePolicy
 {

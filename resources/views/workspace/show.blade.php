@@ -10,6 +10,11 @@
                     </div>
 
                     <div class="flex items-center gap-3">
+                        <a href="{{ route('workspace.projects.index', $workspace) }}"
+                           class="text-sm text-indigo-600 hover:underline">
+                            View Projects
+                        </a>
+
                         @can('update', $workspace)
                             <x-secondary-button :href="route('workspace.edit', $workspace)">Edit</x-secondary-button>
                         @endcan
